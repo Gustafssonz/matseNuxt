@@ -1,13 +1,22 @@
 <template>
 	<div class="container">
 		<div>
-			<Logo />
 			<p v-if="$fetchState.pending">Fetching categories...</p>
-			<p v-else-if="$fetchState.error">An error occurred :(</p>
-			<div v-if="categories">
-				<h1>Amount of categories {{categories.count}}</h1>
-				<Category v-for="category in categories" :data="category" :key="category.id"/>
-				<button @click="$fetch">Refresh</button>
+			<!-- <p v-else-if="$fetchState.error">An error occurred :(</p> -->
+			<div>
+				<h1>Nuxt Category</h1>
+					<h1 v-if="categories">{{categories.name}} HDSA</h1>
+					<div v-if="categories">
+						dsa
+						<div v-for="category in categories" >
+									<Category :data="category" />
+						</div>
+					</div>
+				<button @click="$fetch">Refresh c</button>
+			</div>
+
+			<p v-if="data"> Exist data </p>
+			{{ data }}
 			</div>
 		</div>
 	</div>
@@ -15,16 +24,22 @@
 
 <script>
 export default {
-	data() {
+	data: () => {
 		return {
 			categories: [],
+			data: null
 		};
 	},
 	async fetch() {
-		this.categories = await fetch(
+		categories = await fetch(
 			"https://matse.futurememories.se/getCategoryTree"
 		).then((res) => res.json().then(res => console.log(res)));
 	},
+	mounted () {
+    axios
+      .get('https://matse.futurememories.se/getCategoryTree')
+      .then(response => (this.data = response))
+  }
 };
 </script>
 

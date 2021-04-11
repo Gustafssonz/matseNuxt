@@ -1,19 +1,19 @@
 <template>
 <div>
-    <h1>data.name</h1>
+    <p>{{category}}</p>
 </div>
 </template>
 
 <script>
+
 export default {
-    props: ['data'],
+    props: ['category'],
     data() {
         return {
-            data: ''
-        };
-    }
-
-}
+            category: []
+            }
+        },
+    };
 </script>
 
 <style>
