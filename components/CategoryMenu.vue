@@ -18,8 +18,8 @@
 						</v-list-group>
 					</template>
 					<template v-else>
-						<v-list-item :key="item.name" >
-							<v-list-item-content @click="selectedCategory(item.id)">
+						<v-list-item :key="item.name" @click="selectedCategory(item.id)" >
+							<v-list-item-content >
 								<v-list-item-title v-text="item.name"></v-list-item-title>
 							</v-list-item-content>
 						</v-list-item>

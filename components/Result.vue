@@ -1,8 +1,11 @@
 <template>
 	<div>
-        <div v-for="product in data">
-            <Product class="products" :product="product" />
+        <div class="searchbox">
+            <!-- Searchbox -->
         </div>
+		<div class="productsbox">
+			<Product v-for="product in data" :product="product" />
+		</div>
 	</div>
 </template>
 
@@ -10,15 +13,15 @@
 export default {
 	props: ["data"],
 	data() {
-		return {
-		};
+		return {};
 	},
 };
 </script>
 
 <style>
-.products{
-    flex-direction: row;
-    flex-wrap: wrap;
+.productsbox {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 </style>
