@@ -1,13 +1,13 @@
 <template>
 <div>
-    <p v-if="category.name">{{category.name}}</p>
+    <p v-if="data.name">{{data.name}}</p>
 </div>
 </template>
 
 <script>
 
 export default {
-    props: ['category'],
+    props: ['data'],
     data() {
         return {
             category: []

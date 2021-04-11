@@ -1,16 +1,25 @@
 <template>
 	<div class="container">
+		<div class="nav-drawer">
+				<CategoryMenu :data="categories.subCategories" />
+		</div>
 		<div>
-			<p v-if="$fetchState.pending">Fetching categories...</p>
-			<div v-else>
-				<h1>Nuxt Mountains</h1>
-				<ul>
-					<li v-for="categoryData of categories.subCategories">
-						<Category :category="categoryData" />
-					</li>
-				</ul>
-				<button @click="$fetch">Refresh</button>
+			<div>
 			</div>
+			<!-- <p v-if="$fetchState.pending">Fetching categories...</p>
+			<div v-else>
+				<div v-for="categoryData of categories.subCategories" @click="getProducts(categoryData.id)">
+					<Category :data="categoryData" />
+				</div>
+				<button @click="$fetch">Refresh</button>
+			</div> -->
+
+			<div v-if="products">
+				<div v-for="product in products">
+					<Result :data="product" />
+				</div>
+			</div>
+
 		</div>
 	</div>
 </template>
@@ -20,6 +29,7 @@ export default {
 	data: () => {
 		return {
 			categories: [],
+			products: [],
 		};
 	},
 	async fetch() {
@@ -31,14 +41,21 @@ export default {
 	// 	this.categories = await fetch("https://matse.futurememories.se/getCategoryTree")
 	// 	console.log(categories)
 	// }
+	methods: {
+		async getProducts(categoryId) {
+			this.products = await fetch(
+			`https://matse.futurememories.se/listByCategory?categoryId=${categoryId}`
+		).then((res) => res.json());
+		}
+	}
 };
 </script>
 
 <style>
 .container {
 	margin: 0 auto;
-	min-height: 100vh;
 	display: flex;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
