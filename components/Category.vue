@@ -1,6 +1,6 @@
 <template>
 <div>
-    <p>{{category}}</p>
+    <p v-if="category.name">{{category.name}}</p>
 </div>
 </template>
 

@@ -2,21 +2,14 @@
 	<div class="container">
 		<div>
 			<p v-if="$fetchState.pending">Fetching categories...</p>
-			<!-- <p v-else-if="$fetchState.error">An error occurred :(</p> -->
-			<div>
-				<h1>Nuxt Category</h1>
-					<h1 v-if="categories">{{categories.name}} HDSA</h1>
-					<div v-if="categories">
-						dsa
-						<div v-for="category in categories" >
-									<Category :data="category" />
-						</div>
-					</div>
-				<button @click="$fetch">Refresh c</button>
-			</div>
-
-			<p v-if="data"> Exist data </p>
-			{{ data }}
+			<div v-else>
+				<h1>Nuxt Mountains</h1>
+				<ul>
+					<li v-for="categoryData of categories.subCategories">
+						<Category :category="categoryData" />
+					</li>
+				</ul>
+				<button @click="$fetch">Refresh</button>
 			</div>
 		</div>
 	</div>
@@ -27,19 +20,17 @@ export default {
 	data: () => {
 		return {
 			categories: [],
-			data: null
 		};
 	},
 	async fetch() {
-		categories = await fetch(
+		this.categories = await fetch(
 			"https://matse.futurememories.se/getCategoryTree"
-		).then((res) => res.json().then(res => console.log(res)));
+		).then((res) => res.json());
 	},
-	mounted () {
-    axios
-      .get('https://matse.futurememories.se/getCategoryTree')
-      .then(response => (this.data = response))
-  }
+	// async fetch() {
+	// 	this.categories = await fetch("https://matse.futurememories.se/getCategoryTree")
+	// 	console.log(categories)
+	// }
 };
 </script>
 
