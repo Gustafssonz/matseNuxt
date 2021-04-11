@@ -1,25 +1,11 @@
 <template>
 	<div class="container">
 		<div class="nav-drawer">
-				<CategoryMenu :data="categories.subCategories" />
+				<CategoryMenu :data="categories.subCategories" @emitToParent="getProducts"/>
 		</div>
-		<div>
-			<div>
-			</div>
-			<!-- <p v-if="$fetchState.pending">Fetching categories...</p>
-			<div v-else>
-				<div v-for="categoryData of categories.subCategories" @click="getProducts(categoryData.id)">
-					<Category :data="categoryData" />
-				</div>
-				<button @click="$fetch">Refresh</button>
-			</div> -->
-
-			<div v-if="products">
-				<div v-for="product in products">
-					<Result :data="product" />
-				</div>
-			</div>
-
+		<div class="results" v-if="products" >
+				<Result :data="products" />
+		</div>
 		</div>
 	</div>
 </template>
@@ -29,6 +15,7 @@ export default {
 	data: () => {
 		return {
 			categories: [],
+			selectedCategory: null,
 			products: [],
 		};
 	},
@@ -43,10 +30,15 @@ export default {
 	// }
 	methods: {
 		async getProducts(categoryId) {
+			console.log("getting products with catId ", categoryId);
 			this.products = await fetch(
 			`https://matse.futurememories.se/listByCategory?categoryId=${categoryId}`
 		).then((res) => res.json());
-		}
+		},
+		 onEmitChildValue (value) {
+      this.selectedCategory = value
+			console.log("Child to Parent with value ", this.selectedCategory)
+    }
 	}
 };
 </script>
@@ -55,31 +47,11 @@ export default {
 .container {
 	margin: 0 auto;
 	display: flex;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+}
+.nav-drawer{
+	flex-grow: 20%;
 }
 
-.title {
-	font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-		"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	display: block;
-	font-weight: 300;
-	font-size: 100px;
-	color: #35495e;
-	letter-spacing: 1px;
-}
-
-.subtitle {
-	font-weight: 300;
-	font-size: 42px;
-	color: #526488;
-	word-spacing: 5px;
-	padding-bottom: 15px;
-}
-
-.links {
-	padding-top: 15px;
+.results{
 }
 </style>
