@@ -4,7 +4,7 @@
 				<CategoryMenu :data="categories.subCategories" @emitToParent="getProducts"/>
 		</div>
 		<div class="results" v-if="products" >
-				<Result :data="products" />
+				<Result :dataProps="products" />
 		</div>
 		</div>
 	</div>
@@ -24,16 +24,12 @@ export default {
 			"https://matse.futurememories.se/getCategoryTree"
 		).then((res) => res.json());
 	},
-	// async fetch() {
-	// 	this.categories = await fetch("https://matse.futurememories.se/getCategoryTree")
-	// 	console.log(categories)
-	// }
 	methods: {
 		async getProducts(categoryId) {
 			console.log("getting products with catId ", categoryId);
 			this.products = await fetch(
 			`https://matse.futurememories.se/listByCategory?categoryId=${categoryId}`
-		).then((res) => res.json());
+		).then((res) => res.json().then(console.log(res)));
 		},
 		 onEmitChildValue (value) {
       this.selectedCategory = value
@@ -53,5 +49,7 @@ export default {
 }
 
 .results{
+	margin-left: 12px;
+	width: 100%;
 }
 </style>
