@@ -18,7 +18,7 @@
 						</v-list-group>
 					</template>
 					<template v-else>
-						<v-list-item :key="item.name" @click="selectedCategory(item.id)" >
+						<v-list-item class="submenu" :key="item.name" @click="selectedCategory(item.id)" >
 							<v-list-item-content >
 								<v-list-item-title v-text="item.name"></v-list-item-title>
 							</v-list-item-content>
@@ -41,10 +41,6 @@ export default {
 		selectedCategory(categoryId) {
 			this.$emit('emitToParent', categoryId)
 		},
-	// 	emitToParent (event) {
-    //   this.$emit('childToParent', this.childMessage)
-	//   console.log("Passing data to parent", this.childMessage)
-    // }
 	},
 };
 </script>
@@ -52,5 +48,8 @@ export default {
 <style>
 .title {
 	font-size: 18px;
+}
+.submenu{
+	background-color: rgb(244, 244, 244);
 }
 </style>

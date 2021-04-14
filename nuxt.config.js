@@ -5,7 +5,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -42,11 +42,23 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      name: 'Mat.se API demo',
+      lang: 'en',
+      start_url: '/',
+      display: 'standalone',
+      theme_color : "#3367D6",
+      description : "This is a Mat dot SE (Mat.se) API example demo",
+      icons: [
+        {
+          "src": "./static/icon.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ],
     }
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
 }

@@ -26,14 +26,12 @@ export default {
 	},
 	methods: {
 		async getProducts(categoryId) {
-			console.log("getting products with catId ", categoryId);
 			this.products = await fetch(
 			`https://matse.futurememories.se/listByCategory?categoryId=${categoryId}`
-		).then((res) => res.json().then(console.log(res)));
+		).then((res) => res.json());
 		},
 		 onEmitChildValue (value) {
       this.selectedCategory = value
-			console.log("Child to Parent with value ", this.selectedCategory)
     }
 	}
 };
@@ -47,7 +45,6 @@ export default {
 .nav-drawer{
 	flex-grow: 20%;
 }
-
 .results{
 	margin-left: 12px;
 	width: 100%;
