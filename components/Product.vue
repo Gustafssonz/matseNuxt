@@ -17,7 +17,21 @@ export default {
 
 <style>
 .card{
-	flex: 1 1 0px;
+	/* flex: 1 1 0px; */
 	margin: 10px;
+	width: 20%
+
+}
+
+@media only screen and (max-width: 1200px) {
+	.card {
+		width: 25%
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.card {
+		width: 50%
+	}
 }
 </style>
